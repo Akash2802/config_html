@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.1/dist/js/bootstrap.bundle.min.js" integrity="sha384-gtEjrD/SeCtmISkJkNUaaKMoLD0//ElJ19smozuHV6z3Iehds+3Ulb9Bn9Plx0x4" crossorigin="anonymous"></script>
+    <script src="toolbar.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
+    <link rel="stylesheet" href="toolbar.css">
+    <link rel="stylesheet" href="https://fonts.googleapis.com/icon?family=Material+Icons">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.1/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-+0n0xVW2eSR5OomGNYDnhzAbDsOXxcvSN1TPprVMTNDbiYZCxYbOOl7+AMvyTG2x" crossorigin="anonymous">
+    <title>Document</title>
+</head>
+<body>
+    <div class="toolbar-container">
+        <div class="left-container">
+            <div id="document-title" class="document-title"></div>
+        </div>
+        <div class="action-btn-container">
+            <button class="btn btn-sm action-button" id="btn-1">
+                <img src="assets/save-white.png" alt="Save Icon" class="button-icon"> 
+                <span>Save</span>
+            </button>
+            <button class="btn btn-sm action-button" id="btn-2">
+                <span>Summary Pane</span>
+            </button>
+            <div class="select-wrapper">
+                <img src="assets/open_in_new.svg" alt="Preview Icon" class="select-icon">
+                <select class="form-select form-select-sm" id="previewSelect">
+                    <option value="" disabled selected hidden>Preview</option>
+                    <option value="FinancialReportPdfLayoutOption">PDF</option>
+                    <option value="smartDocHtmlGeneric">HTML</option>
+                    <option value="smartDoctoDocx">WORD</option>
+                </select>
+            </div>
+        </div>
+    </div>    
+</body>
+</html>
