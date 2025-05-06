@@ -2,39 +2,219 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.1/dist/js/bootstrap.bundle.min.js" integrity="sha384-gtEjrD/SeCtmISkJkNUaaKMoLD0//ElJ19smozuHV6z3Iehds+3Ulb9Bn9Plx0x4" crossorigin="anonymous"></script>
-    <script src="toolbar.js"></script>
-    <script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
-    <link rel="stylesheet" href="toolbar.css">
-    <link rel="stylesheet" href="https://fonts.googleapis.com/icon?family=Material+Icons">
-    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.1/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-+0n0xVW2eSR5OomGNYDnhzAbDsOXxcvSN1TPprVMTNDbiYZCxYbOOl7+AMvyTG2x" crossorigin="anonymous">
-    <title>Document</title>
+    <title>Extensible Toolbar</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: Arial, sans-serif;
+        }
+        
+        body {
+            overflow: hidden;
+        }
+        
+        .toolbar-container {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            width: 100%;
+            height: 42px;
+            background-color: #f7f7f7;
+            border-bottom: 1px solid #ddd;
+        }
+        
+        .asset-class-section {
+            display: flex;
+            align-items: center;
+            height: 100%;
+        }
+        
+        .asset-class-label {
+            padding: 0 10px;
+            font-size: 12px;
+            color: #333;
+            font-weight: bold;
+        }
+        
+        .asset-class-options {
+            display: flex;
+            height: 100%;
+        }
+        
+        .asset-class-option {
+            display: flex;
+            align-items: center;
+            height: 100%;
+            padding: 0 15px;
+            font-size: 12px;
+            color: #444;
+            cursor: pointer;
+            border-right: 1px solid #ddd;
+            position: relative;
+        }
+        
+        .square-radio {
+            width: 14px;
+            height: 14px;
+            border: 1px solid #999;
+            margin-right: 5px;
+            display: inline-block;
+            position: relative;
+        }
+        
+        .asset-class-option.active .square-radio::after {
+            content: "";
+            width: 8px;
+            height: 8px;
+            background-color: #444;
+            position: absolute;
+            top: 2px;
+            left: 2px;
+        }
+        
+        .asset-class-option.active {
+            background-color: #fff;
+        }
+        
+        .asset-class-option:hover:not(.active) {
+            background-color: #e9e9e9;
+        }
+        
+        .time-zones {
+            display: flex;
+            height: 100%;
+        }
+        
+        .time-zone {
+            padding: 3px 10px;
+            min-width: 50px;
+            text-align: center;
+            border-left: 1px solid #ddd;
+        }
+        
+        .time-zone-label {
+            font-size: 10px;
+            font-weight: bold;
+            color: #333;
+        }
+        
+        .time-zone-value {
+            font-size: 12px;
+            color: #444;
+        }
+    </style>
 </head>
 <body>
     <div class="toolbar-container">
-        <div class="left-container">
-            <div id="document-title" class="document-title"></div>
-        </div>
-        <div class="action-btn-container">
-            <button class="btn btn-sm action-button" id="btn-1">
-                <img src="assets/save-white.png" alt="Save Icon" class="button-icon"> 
-                <span>Save</span>
-            </button>
-            <button class="btn btn-sm action-button" id="btn-2">
-                <span>Summary Pane</span>
-            </button>
-            <div class="select-wrapper">
-                <img src="assets/open_in_new.svg" alt="Preview Icon" class="select-icon">
-                <select class="form-select form-select-sm" id="previewSelect">
-                    <option value="" disabled selected hidden>Preview</option>
-                    <option value="FinancialReportPdfLayoutOption">PDF</option>
-                    <option value="smartDocHtmlGeneric">HTML</option>
-                    <option value="smartDoctoDocx">WORD</option>
-                </select>
+        <!-- Left Side - Asset Classes with Radio Buttons -->
+        <div class="asset-class-section">
+            <div class="asset-class-label">Asset Class:</div>
+            <div class="asset-class-options">
+                <div class="asset-class-option active">
+                    <span class="square-radio"></span>Credit
+                </div>
+                <div class="asset-class-option">
+                    <span class="square-radio"></span>Macro
+                </div>
+                <div class="asset-class-option">
+                    <span class="square-radio"></span>Equity
+                </div>
+                <div class="asset-class-option">
+                    <span class="square-radio"></span>Cross-Asset
+                </div>
+                <div class="asset-class-option">
+                    <span class="square-radio"></span>Marketing
+                </div>
             </div>
         </div>
-    </div>    
+        
+        <!-- Middle section (empty or for future use) -->
+        <div class="middle-section"></div>
+        
+        <!-- Right Side - Time Zones -->
+        <div class="time-zones">
+            <div class="time-zone">
+                <div class="time-zone-label">TKY</div>
+                <div class="time-zone-value">09:23</div>
+            </div>
+            <div class="time-zone">
+                <div class="time-zone-label">HNG</div>
+                <div class="time-zone-value">23:23</div>
+            </div>
+            <div class="time-zone">
+                <div class="time-zone-label">SGP</div>
+                <div class="time-zone-value">21:23</div>
+            </div>
+            <div class="time-zone">
+                <div class="time-zone-label">MUM</div>
+                <div class="time-zone-value">20:33</div>
+            </div>
+            <div class="time-zone">
+                <div class="time-zone-label">LDN</div>
+                <div class="time-zone-value">15:44</div>
+            </div>
+            <div class="time-zone">
+                <div class="time-zone-label">NYC</div>
+                <div class="time-zone-value">10:23</div>
+            </div>
+            <div class="time-zone">
+                <div class="time-zone-label">SFO</div>
+                <div class="time-zone-value">07:23</div>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        document.addEventListener('DOMContentLoaded', function() {
+            // Handle radio button selection
+            const assetClassOptions = document.querySelectorAll('.asset-class-option');
+            assetClassOptions.forEach(option => {
+                option.addEventListener('click', function() {
+                    // Remove active class from all options
+                    assetClassOptions.forEach(o => o.classList.remove('active'));
+                    // Add active class to clicked option
+                    this.classList.add('active');
+                    
+                    // Notify parent application about the selection change
+                    if (window.parent && window.parent.postMessage) {
+                        window.parent.postMessage({
+                            type: 'assetClassChange',
+                            assetClass: this.textContent.trim()
+                        }, '*');
+                    }
+                });
+            });
+            
+            // Update time zones based on local time
+            function updateTimezones() {
+                const now = new Date();
+                
+                // Set times for each timezone
+                const timezones = [
+                    { element: document.querySelector('.time-zone:nth-child(1) .time-zone-value'), offset: 9 },  // Tokyo
+                    { element: document.querySelector('.time-zone:nth-child(2) .time-zone-value'), offset: 8 },  // Hong Kong
+                    { element: document.querySelector('.time-zone:nth-child(3) .time-zone-value'), offset: 8 },  // Singapore
+                    { element: document.querySelector('.time-zone:nth-child(4) .time-zone-value'), offset: 5.5 },// Mumbai
+                    { element: document.querySelector('.time-zone:nth-child(5) .time-zone-value'), offset: 1 },  // London
+                    { element: document.querySelector('.time-zone:nth-child(6) .time-zone-value'), offset: -4 }, // New York
+                    { element: document.querySelector('.time-zone:nth-child(7) .time-zone-value'), offset: -7 }  // San Francisco
+                ];
+                
+                timezones.forEach(tz => {
+                    const localTime = new Date(now.getTime() + (now.getTimezoneOffset() + tz.offset * 60) * 60000);
+                    const hours = localTime.getHours().toString().padStart(2, '0');
+                    const minutes = localTime.getMinutes().toString().padStart(2, '0');
+                    tz.element.textContent = `${hours}:${minutes}`;
+                });
+            }
+            
+            // Update times immediately and then every minute
+            updateTimezones();
+            setInterval(updateTimezones, 60000);
+        });
+    </script>
 </body>
 </html>
